@@ -28,8 +28,7 @@ library(packageRank)
 ```
 
 
-Row
------------------------------------------------------------------------
+
 
 ### Details & Description of Package
 
@@ -39,8 +38,6 @@ renderPrint(packageDescription(input$package_selected))
 ```
 
 
-Row
------------------------------------------------------------------------
 ### Date wise Spiky Graph of Downloads - Please Select Date Range
 
 ```{r}
