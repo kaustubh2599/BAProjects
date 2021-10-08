@@ -1,0 +1,61 @@
+---
+output:
+  flexdashboard::flex_dashboard: default
+  html_document: default
+runtime: shiny
+---
+title: "R Package Download Information"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    source_code: embed  
+runtime: shiny
+---
+
+
+```{r setup, include=FALSE}
+library(shiny)
+library(flexdashboard)
+# Libraries required are being loaded here
+
+
+library(miniCRAN)
+library(pkgsearch)
+library(cranlogs)
+library(packageRank)
+
+```
+
+
+
+
+### Details & Description of Package
+
+```{r}
+textInput("package_selected", "Please Enter Package Name", "ggplot2")
+renderPrint(packageDescription(input$package_selected))
+```
+
+
+
+### Date wise Spiky Graph of Downloads - Please Select Date Range
+
+```{r}
+textInput("from", "From", "2020-01-01")
+textInput("to", "To", "2020-12-31")
+renderPlot(plot(cranDownloads(packages = input$package_selected, from = input$from, to = input$to),
+       r.version = TRUE))
+```
+
+
+### Date wise Table of Download Details 
+
+```{r}
+renderPrint(cranDownloads(packages = input$package_selected, from = input$from, to = input$to))
+```
+
+
+Authors {data-orientation=rows}
+=====================================   
+### Once user enters the name of the package, the dashboard will show its description, and further by mentioning the date range it will show a spiky graph of downloads for a given date range followed by a table with details of downloads. This dashboard is highly beneficial for a data scientist, R package maintainers, and other R users to get information about R package and downloads at one point. It is also helpful to undersatnd the usage freqency and popularity of the package.
